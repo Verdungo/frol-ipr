@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Синхронизация с использованием ReentrantLock
+ * РЎРёРЅС…СЂРѕРЅРёР·Р°С†РёСЏ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј ReentrantLock
  */
 public class ReentrantLockStudy {
     public static void main(String[] args) throws InterruptedException {
@@ -34,7 +34,7 @@ public class ReentrantLockStudy {
     }
 }
 
-// методы закомментированного класса несинхронизированны - результат не совпадает с ожидаемым
+// РјРµС‚РѕРґС‹ Р·Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР° РЅРµСЃРёРЅС…СЂРѕРЅРёР·РёСЂРѕРІР°РЅРЅС‹ - СЂРµР·СѓР»СЊС‚Р°С‚ РЅРµ СЃРѕРІРїР°РґР°РµС‚ СЃ РѕР¶РёРґР°РµРјС‹Рј
 //class Task {
 //    private int counter;
 //
@@ -57,12 +57,12 @@ public class ReentrantLockStudy {
 //    }
 //}
 
-// используем ReentrantLock для синхронизации
+// РёСЃРїРѕР»СЊР·СѓРµРј ReentrantLock РґР»СЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё
 class Task {
     private int counter;
     Lock lock = new ReentrantLock();
 
-    // в каждом методе перед вызовом метода берем лок, после - отпускаем
+    // РІ РєР°Р¶РґРѕРј РјРµС‚РѕРґРµ РїРµСЂРµРґ РІС‹Р·РѕРІРѕРј РјРµС‚РѕРґР° Р±РµСЂРµРј Р»РѕРє, РїРѕСЃР»Рµ - РѕС‚РїСѓСЃРєР°РµРј
     public void thread1() {
         lock.lock();
         increment();

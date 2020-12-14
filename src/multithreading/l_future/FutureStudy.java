@@ -8,23 +8,23 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- * Пример получения результата работы процесса с применением Future и Callable
+ * РџСЂРёРјРµСЂ РїРѕР»СѓС‡РµРЅРёСЏ СЂРµР·СѓР»СЊС‚Р°С‚Р° СЂР°Р±РѕС‚С‹ РїСЂРѕС†РµСЃСЃР° СЃ РїСЂРёРјРµРЅРµРЅРёРµРј Future Рё Callable
  */
 public class FutureStudy {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(1);
 
-        // можем получить результат работы потока
-        // для этого в пул передаем не Runnable (который void), а Callable (возвращает Future<?>)
-        // тут фьюче специально raw, я так захотел =)
+        // РјРѕР¶РµРј РїРѕР»СѓС‡РёС‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚ СЂР°Р±РѕС‚С‹ РїРѕС‚РѕРєР°
+        // РґР»СЏ СЌС‚РѕРіРѕ РІ РїСѓР» РїРµСЂРµРґР°РµРј РЅРµ Runnable (РєРѕС‚РѕСЂС‹Р№ void), Р° Callable (РІРѕР·РІСЂР°С‰Р°РµС‚ Future<?>)
+        // С‚СѓС‚ С„СЊСЋС‡Рµ СЃРїРµС†РёР°Р»СЊРЅРѕ raw, СЏ С‚Р°Рє Р·Р°С…РѕС‚РµР» =)
         Future future = executorService.submit(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
-                // симулируем какое-то долгое вычисление
+                // СЃРёРјСѓР»РёСЂСѓРµРј РєР°РєРѕРµ-С‚Рѕ РґРѕР»РіРѕРµ РІС‹С‡РёСЃР»РµРЅРёРµ
                 Thread.sleep(5000);
                 int randomValue = new Random().nextInt(10);
 
-                // искуственное выбрасывание, чтобы посмотреть как обработать при попытке get()
+                // РёСЃРєСѓСЃС‚РІРµРЅРЅРѕРµ РІС‹Р±СЂР°СЃС‹РІР°РЅРёРµ, С‡С‚РѕР±С‹ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РєР°Рє РѕР±СЂР°Р±РѕС‚Р°С‚СЊ РїСЂРё РїРѕРїС‹С‚РєРµ get()
                 if (randomValue < 6) {
                     throw new Exception("random is less than 6");
                 }
@@ -37,18 +37,18 @@ public class FutureStudy {
 
         System.out.println("future: " + future);
         try {
-            // тут при попытке get() будем дожидаться, пока его вернет поток.
+            // С‚СѓС‚ РїСЂРё РїРѕРїС‹С‚РєРµ get() Р±СѓРґРµРј РґРѕР¶РёРґР°С‚СЊСЃСЏ, РїРѕРєР° РµРіРѕ РІРµСЂРЅРµС‚ РїРѕС‚РѕРє.
             System.out.println("future.get: " + future.get());
             System.out.println("future.get.class: " + future.get().getClass());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
-            // выброшенное в потоке исключение, поймали при попытке get()
+            // РІС‹Р±СЂРѕС€РµРЅРЅРѕРµ РІ РїРѕС‚РѕРєРµ РёСЃРєР»СЋС‡РµРЅРёРµ, РїРѕР№РјР°Р»Рё РїСЂРё РїРѕРїС‹С‚РєРµ get()
             System.out.println(e.getCause().getMessage());
         }
 
 
-        // такой поток ничего не возвращает, просто делает некоторую работу
+        // С‚Р°РєРѕР№ РїРѕС‚РѕРє РЅРёС‡РµРіРѕ РЅРµ РІРѕР·РІСЂР°С‰Р°РµС‚, РїСЂРѕСЃС‚Рѕ РґРµР»Р°РµС‚ РЅРµРєРѕС‚РѕСЂСѓСЋ СЂР°Р±РѕС‚Сѓ
         /*executorService.submit(new Runnable() {
             @Override
             public void run() {

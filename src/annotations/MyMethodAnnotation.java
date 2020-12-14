@@ -6,12 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Такой аннотацией можно декорировать только метод
- * IDE будет истерить, если попробовать декорировать что-то другое
+ * РўР°РєРѕР№ Р°РЅРЅРѕС‚Р°С†РёРµР№ РјРѕР¶РЅРѕ РґРµРєРѕСЂРёСЂРѕРІР°С‚СЊ С‚РѕР»СЊРєРѕ РјРµС‚РѕРґ
+ * IDE Р±СѓРґРµС‚ РёСЃС‚РµСЂРёС‚СЊ, РµСЃР»Рё РїРѕРїСЂРѕР±РѕРІР°С‚СЊ РґРµРєРѕСЂРёСЂРѕРІР°С‚СЊ С‡С‚Рѕ-С‚Рѕ РґСЂСѓРіРѕРµ
  */
 @Target(ElementType.METHOD)
-@Retention(RetentionPolicy.SOURCE)      // - не учитывается компилятором
-//@Retention(RetentionPolicy.CLASS)     // - сохраняется в скомпилированном class (default)
-//@Retention(RetentionPolicy.RUNTIME)   // - доступна JVM при исполнении
+@Retention(RetentionPolicy.SOURCE)      // - РЅРµ СѓС‡РёС‚С‹РІР°РµС‚СЃСЏ РєРѕРјРїРёР»СЏС‚РѕСЂРѕРј
+//@Retention(RetentionPolicy.CLASS)     // - СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ РІ СЃРєРѕРјРїРёР»РёСЂРѕРІР°РЅРЅРѕРј class (default)
+//@Retention(RetentionPolicy.RUNTIME)   // - РґРѕСЃС‚СѓРїРЅР° JVM РїСЂРё РёСЃРїРѕР»РЅРµРЅРёРё
 public @interface MyMethodAnnotation {
 }

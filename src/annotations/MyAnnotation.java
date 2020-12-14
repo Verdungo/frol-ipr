@@ -2,7 +2,7 @@ package annotations;
 
 // default @Retention = CLASS
 // default @Target = ANY
-/** Такую аннотацию можно применять на все подряд - классы, методы, поля, агрументы */
+/** РўР°РєСѓСЋ Р°РЅРЅРѕС‚Р°С†РёСЋ РјРѕР¶РЅРѕ РїСЂРёРјРµРЅСЏС‚СЊ РЅР° РІСЃРµ РїРѕРґСЂСЏРґ - РєР»Р°СЃСЃС‹, РјРµС‚РѕРґС‹, РїРѕР»СЏ, Р°РіСЂСѓРјРµРЅС‚С‹ */
 public @interface MyAnnotation {
     String name();
     String author() default "[none]";

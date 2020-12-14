@@ -5,7 +5,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * Реализация паттерна производитель/потребитель с использованием ArrayBlockingQueue
+ * Р РµР°Р»РёР·Р°С†РёСЏ РїР°С‚С‚РµСЂРЅР° РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊ/РїРѕС‚СЂРµР±РёС‚РµР»СЊ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј ArrayBlockingQueue
  */
 public class ProdConsStudy {
 
@@ -14,13 +14,13 @@ public class ProdConsStudy {
     public static final String ANSI_GREEN = "\u001B[32m";
 
     /**
-     * Очередь блокирующая, думать о потокобезопасности - ее задача.
-     * В коде ниже - никаких явных синхронизаций
+     * РћС‡РµСЂРµРґСЊ Р±Р»РѕРєРёСЂСѓСЋС‰Р°СЏ, РґСѓРјР°С‚СЊ Рѕ РїРѕС‚РѕРєРѕР±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё - РµРµ Р·Р°РґР°С‡Р°.
+     * Р’ РєРѕРґРµ РЅРёР¶Рµ - РЅРёРєР°РєРёС… СЏРІРЅС‹С… СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёР№
      */
     private static BlockingQueue<Integer> queue= new ArrayBlockingQueue<>(10);
 
     public static void main(String[] args) throws InterruptedException {
-        // поток производителя - пишет в очередь числа (всегда, когда очередт доступна и размер позволяет)
+        // РїРѕС‚РѕРє РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЏ - РїРёС€РµС‚ РІ РѕС‡РµСЂРµРґСЊ С‡РёСЃР»Р° (РІСЃРµРіРґР°, РєРѕРіРґР° РѕС‡РµСЂРµРґС‚ РґРѕСЃС‚СѓРїРЅР° Рё СЂР°Р·РјРµСЂ РїРѕР·РІРѕР»СЏРµС‚)
         Thread producerThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -32,7 +32,7 @@ public class ProdConsStudy {
             }
         });
 
-        // поток потребителя - забирает из очереди числа (с интервалом 100 мс)
+        // РїРѕС‚РѕРє РїРѕС‚СЂРµР±РёС‚РµР»СЏ - Р·Р°Р±РёСЂР°РµС‚ РёР· РѕС‡РµСЂРµРґРё С‡РёСЃР»Р° (СЃ РёРЅС‚РµСЂРІР°Р»РѕРј 100 РјСЃ)
         Thread consumerThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -57,9 +57,9 @@ public class ProdConsStudy {
 
         while (true) {
             Integer i = Integer.valueOf(random.nextInt(20));
-            System.out.println(ANSI_RED + "Producer положил: " + i + ANSI_RESET);
+            System.out.println(ANSI_RED + "Producer РїРѕР»РѕР¶РёР»: " + i + ANSI_RESET);
             queue.put(i);
-            System.out.println(ANSI_RED + "Prosucer: длина очереди - " + queue.size() + ANSI_RESET);
+            System.out.println(ANSI_RED + "Prosucer: РґР»РёРЅР° РѕС‡РµСЂРµРґРё - " + queue.size() + ANSI_RESET);
         }
     }
 
@@ -69,8 +69,8 @@ public class ProdConsStudy {
         while (true) {
             Thread.sleep(100);
             if (random.nextInt(100) < 5) {
-                System.out.println(ANSI_GREEN + "Consumer взял: " + queue.take() + "." + ANSI_RESET);
-                System.out.println(ANSI_GREEN + "Consumer: длина очереди - " + queue.size() + ANSI_RESET);
+                System.out.println(ANSI_GREEN + "Consumer РІР·СЏР»: " + queue.take() + "." + ANSI_RESET);
+                System.out.println(ANSI_GREEN + "Consumer: РґР»РёРЅР° РѕС‡РµСЂРµРґРё - " + queue.size() + ANSI_RESET);
             }
         }
     }

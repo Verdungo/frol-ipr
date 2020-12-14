@@ -3,7 +3,7 @@ package multithreading.k_interrupt;
 import java.util.Random;
 
 /**
- * Демонстрация прерывания одним потоком другого
+ * Р”РµРјРѕРЅСЃС‚СЂР°С†РёСЏ РїСЂРµСЂС‹РІР°РЅРёСЏ РѕРґРЅРёРј РїРѕС‚РѕРєРѕРј РґСЂСѓРіРѕРіРѕ
  */
 public class InterruptStudy {
     public static void main(String[] args) throws InterruptedException {
@@ -13,9 +13,9 @@ public class InterruptStudy {
             @Override
             public void run() {
                 Random random = new Random();
-                // симуляция ОООЧЕНЬ долгого процесса
+                // СЃРёРјСѓР»СЏС†РёСЏ РћРћРћР§Р•РќР¬ РґРѕР»РіРѕРіРѕ РїСЂРѕС†РµСЃСЃР°
                 for (int i = 0; i < 1_000_000_000; i++) {
-                    //если поток был прерван извне, пишем, что нас прервали и выходим из цикла
+                    //РµСЃР»Рё РїРѕС‚РѕРє Р±С‹Р» РїСЂРµСЂРІР°РЅ РёР·РІРЅРµ, РїРёС€РµРј, С‡С‚Рѕ РЅР°СЃ РїСЂРµСЂРІР°Р»Рё Рё РІС‹С…РѕРґРёРј РёР· С†РёРєР»Р°
                     if (Thread.currentThread().isInterrupted()) {
                         System.out.println("INTERRUPTED!");
                         break;
@@ -31,7 +31,7 @@ public class InterruptStudy {
 
         Thread.sleep(2000);
 
-        // прервем поток раньше, чем он закончится сам
+        // РїСЂРµСЂРІРµРј РїРѕС‚РѕРє СЂР°РЅСЊС€Рµ, С‡РµРј РѕРЅ Р·Р°РєРѕРЅС‡РёС‚СЃСЏ СЃР°Рј
         thread.interrupt();
 
         thread.join();

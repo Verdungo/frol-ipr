@@ -3,8 +3,8 @@ package multithreading.f_wait_notify;
 import java.util.Scanner;
 
 /**
- * Все тот же паттерн producer/consumer
- * с применением методов Object wait() и notify()
+ * Р’СЃРµ С‚РѕС‚ Р¶Рµ РїР°С‚С‚РµСЂРЅ producer/consumer
+ * СЃ РїСЂРёРјРµРЅРµРЅРёРµРј РјРµС‚РѕРґРѕРІ Object wait() Рё notify()
  */
 public class WaitAndNotifyStudy {
     public static void main(String[] args) throws InterruptedException {
@@ -41,10 +41,10 @@ public class WaitAndNotifyStudy {
 
 class WaitAndNotify {
     public void produce() throws InterruptedException {
-        // синхронизация на "самом себе"
+        // СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёСЏ РЅР° "СЃР°РјРѕРј СЃРµР±Рµ"
         synchronized (this) {
             System.out.println("Producer thread started...");
-            this.wait();// отдаем лок другим потокам и ждем notify от других потоков
+            this.wait();// РѕС‚РґР°РµРј Р»РѕРє РґСЂСѓРіРёРј РїРѕС‚РѕРєР°Рј Рё Р¶РґРµРј notify РѕС‚ РґСЂСѓРіРёС… РїРѕС‚РѕРєРѕРІ
             System.out.println("Producer thread resumed...");
         }
     }
@@ -58,10 +58,10 @@ class WaitAndNotify {
             in.nextLine();
 
             System.out.println("---Key pressed... notifying");
-            notify();// возвращаем лок, продюсер продолжит работу после выхода из этого synch-блока
+            notify();// РІРѕР·РІСЂР°С‰Р°РµРј Р»РѕРє, РїСЂРѕРґСЋСЃРµСЂ РїСЂРѕРґРѕР»Р¶РёС‚ СЂР°Р±РѕС‚Сѓ РїРѕСЃР»Рµ РІС‹С…РѕРґР° РёР· СЌС‚РѕРіРѕ synch-Р±Р»РѕРєР°
 
             System.out.println("---Waiting for another return key press...");
-            in.nextLine(); // ждем, чтобы показать, что notify не вернет лок мгновенно
+            in.nextLine(); // Р¶РґРµРј, С‡С‚РѕР±С‹ РїРѕРєР°Р·Р°С‚СЊ, С‡С‚Рѕ notify РЅРµ РІРµСЂРЅРµС‚ Р»РѕРє РјРіРЅРѕРІРµРЅРЅРѕ
 
             System.out.println("---Key pressed... end of synchronized block, returnong lock");
         }

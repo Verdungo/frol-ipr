@@ -7,13 +7,13 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Имитация ограничения доступности ресурса (подключения)
+ * РРјРёС‚Р°С†РёСЏ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РґРѕСЃС‚СѓРїРЅРѕСЃС‚Рё СЂРµСЃСѓСЂСЃР° (РїРѕРґРєР»СЋС‡РµРЅРёСЏ)
  */
 public class SemaphoreStudy {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService ex = Executors.newFixedThreadPool(200);
 
-        // 100 "подключений" претендуют на ресурс одновременно
+        // 100 "РїРѕРґРєР»СЋС‡РµРЅРёР№" РїСЂРµС‚РµРЅРґСѓСЋС‚ РЅР° СЂРµСЃСѓСЂСЃ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ
         for (int i = 0; i < 200; i++) {
             int finalI = i;
             ex.submit(new Runnable() {
@@ -34,11 +34,11 @@ public class SemaphoreStudy {
     }
 }
 
-// имитация соединения с сервером с ограниченным числом подключений
+// РёРјРёС‚Р°С†РёСЏ СЃРѕРµРґРёРЅРµРЅРёСЏ СЃ СЃРµСЂРІРµСЂРѕРј СЃ РѕРіСЂР°РЅРёС‡РµРЅРЅС‹Рј С‡РёСЃР»РѕРј РїРѕРґРєР»СЋС‡РµРЅРёР№
 class Connection {
     private static Connection instance = new Connection();
     private int connections = 0;
-    // может быть не больше 10 подключений, будут пополняться по мере освобождения
+    // РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµ Р±РѕР»СЊС€Рµ 10 РїРѕРґРєР»СЋС‡РµРЅРёР№, Р±СѓРґСѓС‚ РїРѕРїРѕР»РЅСЏС‚СЊСЃСЏ РїРѕ РјРµСЂРµ РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ
     private final Semaphore semaphore = new Semaphore(10);
 
     private Connection() {
@@ -53,20 +53,20 @@ class Connection {
         try {
             doWork(i);
         } finally {
-            // release всегда в finally, чтобы гарантированно освобождать ресурс, если в doWork произошла ошибка
+            // release РІСЃРµРіРґР° РІ finally, С‡С‚РѕР±С‹ РіР°СЂР°РЅС‚РёСЂРѕРІР°РЅРЅРѕ РѕСЃРІРѕР±РѕР¶РґР°С‚СЊ СЂРµСЃСѓСЂСЃ, РµСЃР»Рё РІ doWork РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°
             semaphore.release();
         }
     }
 
-    // имитация работы
+    // РёРјРёС‚Р°С†РёСЏ СЂР°Р±РѕС‚С‹
     private void doWork(int i) throws InterruptedException {
         // connect
         synchronized (this) {
             connections++;
-            System.out.println(i + ": " + connections + " connections");//тут никогда не должны увидеть больше 10
+            System.out.println(i + ": " + connections + " connections");//С‚СѓС‚ РЅРёРєРѕРіРґР° РЅРµ РґРѕР»Р¶РЅС‹ СѓРІРёРґРµС‚СЊ Р±РѕР»СЊС€Рµ 10
         }
 
-        // WORK random period (чтобы все потоки не стартовали/завершались единовременно)
+        // WORK random period (С‡С‚РѕР±С‹ РІСЃРµ РїРѕС‚РѕРєРё РЅРµ СЃС‚Р°СЂС‚РѕРІР°Р»Рё/Р·Р°РІРµСЂС€Р°Р»РёСЃСЊ РµРґРёРЅРѕРІСЂРµРјРµРЅРЅРѕ)
         Thread.sleep(new Random().nextInt(3000));
 
         // disconnect

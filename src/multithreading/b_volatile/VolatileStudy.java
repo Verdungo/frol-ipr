@@ -7,7 +7,7 @@ public class VolatileStudy {
         MyThreadWithVolatile myThread = new MyThreadWithVolatile();
         myThread.start();
 
-        // поток выполняется, в то время как основной стоит и ждет пользовательского ввода
+        // РїРѕС‚РѕРє РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ, РІ С‚Рѕ РІСЂРµРјСЏ РєР°Рє РѕСЃРЅРѕРІРЅРѕР№ СЃС‚РѕРёС‚ Рё Р¶РґРµС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РІРІРѕРґР°
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
 
@@ -16,7 +16,7 @@ public class VolatileStudy {
 }
 
 class MyThreadWithVolatile extends Thread {
-    //volatile тут нужен для "некеширования" переменной
+    //volatile С‚СѓС‚ РЅСѓР¶РµРЅ РґР»СЏ "РЅРµРєРµС€РёСЂРѕРІР°РЅРёСЏ" РїРµСЂРµРјРµРЅРЅРѕР№
     private volatile boolean running = true;
 
     @Override

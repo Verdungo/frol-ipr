@@ -10,11 +10,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * Тестирование пользовательской аннотации {@link ActionListenerFor},
- * устанавливающей обработчик события (нажатия кнопки)
+ * РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕР№ Р°РЅРЅРѕС‚Р°С†РёРё {@link ActionListenerFor},
+ * СѓСЃС‚Р°РЅР°РІР»РёРІР°СЋС‰РµР№ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕР±С‹С‚РёСЏ (РЅР°Р¶Р°С‚РёСЏ РєРЅРѕРїРєРё)
  */
-//@MyMethodAnnotation - не применимо, т.к. имеет таргет ElementType.METHOD
-@MyAnnotation(name = "name", id = 1) // автор тоже неявно присутствует как default-значение
+//@MyMethodAnnotation - РЅРµ РїСЂРёРјРµРЅРёРјРѕ, С‚.Рє. РёРјРµРµС‚ С‚Р°СЂРіРµС‚ ElementType.METHOD
+@MyAnnotation(name = "name", id = 1) // Р°РІС‚РѕСЂ С‚РѕР¶Рµ РЅРµСЏРІРЅРѕ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚ РєР°Рє default-Р·РЅР°С‡РµРЅРёРµ
 public class AnnotationStudy {
     public static void main(String[] args) {
         ButtonFrame frame = new ButtonFrame();
@@ -24,7 +24,7 @@ public class AnnotationStudy {
 }
 
 /**
- * Вспомогательный класс панели с кнопками
+ * Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ РїР°РЅРµР»Рё СЃ РєРЅРѕРїРєР°РјРё
  */
 class ButtonFrame extends JFrame {
     private static final int DEFAULT_HEIGHT = 200;
@@ -35,7 +35,7 @@ class ButtonFrame extends JFrame {
     private final JButton redButton = new JButton("Red");
 
     public ButtonFrame() throws HeadlessException {
-        setTitle("Панель с кнопками");
+        setTitle("РџР°РЅРµР»СЊ СЃ РєРЅРѕРїРєР°РјРё");
         setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
 
         panel = new JPanel();
@@ -49,7 +49,7 @@ class ButtonFrame extends JFrame {
 
     }
 
-    // задаем обработчиков с помощью аннотаций
+    // Р·Р°РґР°РµРј РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ СЃ РїРѕРјРѕС‰СЊСЋ Р°РЅРЅРѕС‚Р°С†РёР№
 
     @ActionListenerFor("yellowButton")
     public void yellowBackground() {
@@ -69,14 +69,14 @@ class ButtonFrame extends JFrame {
 }
 
 /**
- * Всё волшебство аннотаций здесь
- * Тут происходит связывание объектов и их слушателей
- * И тут - рефлексия!
+ * Р’СЃС‘ РІРѕР»С€РµР±СЃС‚РІРѕ Р°РЅРЅРѕС‚Р°С†РёР№ Р·РґРµСЃСЊ
+ * РўСѓС‚ РїСЂРѕРёСЃС…РѕРґРёС‚ СЃРІСЏР·С‹РІР°РЅРёРµ РѕР±СЉРµРєС‚РѕРІ Рё РёС… СЃР»СѓС€Р°С‚РµР»РµР№
+ * Р С‚СѓС‚ - СЂРµС„Р»РµРєСЃРёСЏ!
  */
 class ActionListenerUtil {
 
     /**
-     * Ищет все декорированные ActionListenerFor методы, привязывает к соответствующим полям
+     * РС‰РµС‚ РІСЃРµ РґРµРєРѕСЂРёСЂРѕРІР°РЅРЅС‹Рµ ActionListenerFor РјРµС‚РѕРґС‹, РїСЂРёРІСЏР·С‹РІР°РµС‚ Рє СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРј РїРѕР»СЏРј
      * @param obj
      */
     @MyMethodAnnotation

@@ -6,18 +6,18 @@ public class ThreadsStudy {
     private static final Logger LOGGER = Logger.getLogger(ThreadsStudy.class.getName());
 
     public static void main(String[] args) throws InterruptedException {
-        //вариант 1 - наследник Thread
+        //РІР°СЂРёР°РЅС‚ 1 - РЅР°СЃР»РµРґРЅРёРє Thread
         MyThread myThread1 = new MyThread("MyThread");
-        //вариант 2 - имлементация Runnable
+        //РІР°СЂРёР°РЅС‚ 2 - РёРјР»РµРјРµРЅС‚Р°С†РёСЏ Runnable
         Thread myThread2 = new Thread(new MyRunnable("MyRunnable"));
         myThread1.start();
         myThread2.start();
 
-        LOGGER.info("----------------------------- Сразу после запуска потоков");
+        LOGGER.info("----------------------------- РЎСЂР°Р·Сѓ РїРѕСЃР»Рµ Р·Р°РїСѓСЃРєР° РїРѕС‚РѕРєРѕРІ");
 
         Thread.sleep(2000);
 
-        LOGGER.info("----------------------------- Просто подождали две секунды");
+        LOGGER.info("----------------------------- РџСЂРѕСЃС‚Рѕ РїРѕРґРѕР¶РґР°Р»Рё РґРІРµ СЃРµРєСѓРЅРґС‹");
     }
 }
 

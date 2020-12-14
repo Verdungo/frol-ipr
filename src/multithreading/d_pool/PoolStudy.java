@@ -5,28 +5,28 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Пример потоков с использованием пулов ExecutorService
+ * РџСЂРёРјРµСЂ РїРѕС‚РѕРєРѕРІ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РїСѓР»РѕРІ ExecutorService
  */
 public class PoolStudy {
     public static void main(String[] args) throws InterruptedException {
-        // пул потоков, которым можно скармливать Runnable`ы.
-        // Их выполнением будет рулить пул. В этом примере в пуле два потоку выполнения
+        // РїСѓР» РїРѕС‚РѕРєРѕРІ, РєРѕС‚РѕСЂС‹Рј РјРѕР¶РЅРѕ СЃРєР°СЂРјР»РёРІР°С‚СЊ Runnable`С‹.
+        // РС… РІС‹РїРѕР»РЅРµРЅРёРµРј Р±СѓРґРµС‚ СЂСѓР»РёС‚СЊ РїСѓР». Р’ СЌС‚РѕРј РїСЂРёРјРµСЂРµ РІ РїСѓР»Рµ РґРІР° РїРѕС‚РѕРєСѓ РІС‹РїРѕР»РЅРµРЅРёСЏ
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-        // загружаем пулу (из 2 потоков) 5 "работ"
+        // Р·Р°РіСЂСѓР¶Р°РµРј РїСѓР»Сѓ (РёР· 2 РїРѕС‚РѕРєРѕРІ) 5 "СЂР°Р±РѕС‚"
         for (int i = 0; i < 5; i++) {
             executorService.submit(new Work(i));
         }
         System.out.println("Submitted");
 
-        // закончили "выдавать работу".
-        executorService.shutdown();        // Без shutdown'а awaitTermination будет ждать весь свой таймаут, потоки будут активны
+        // Р·Р°РєРѕРЅС‡РёР»Рё "РІС‹РґР°РІР°С‚СЊ СЂР°Р±РѕС‚Сѓ".
+        executorService.shutdown();        // Р‘РµР· shutdown'Р° awaitTermination Р±СѓРґРµС‚ Р¶РґР°С‚СЊ РІРµСЃСЊ СЃРІРѕР№ С‚Р°Р№РјР°СѓС‚, РїРѕС‚РѕРєРё Р±СѓРґСѓС‚ Р°РєС‚РёРІРЅС‹
         System.out.println("Shutdown");
 
-        // после шатдауна дать пулу работу не получится
+        // РїРѕСЃР»Рµ С€Р°С‚РґР°СѓРЅР° РґР°С‚СЊ РїСѓР»Сѓ СЂР°Р±РѕС‚Сѓ РЅРµ РїРѕР»СѓС‡РёС‚СЃСЏ
         //executorService.submit(new Work(20));
 
-        // дожидаемся, пока все потоки из пула будут завершены
+        // РґРѕР¶РёРґР°РµРјСЃСЏ, РїРѕРєР° РІСЃРµ РїРѕС‚РѕРєРё РёР· РїСѓР»Р° Р±СѓРґСѓС‚ Р·Р°РІРµСЂС€РµРЅС‹
         executorService.awaitTermination(1, TimeUnit.MINUTES);
         System.out.println("awaited");
     }
@@ -44,7 +44,7 @@ class Work implements Runnable{
     public void run() {
         System.out.println("--------- BEGIN WORK (" + id + ") ----------");
         try {
-            // симуляция работы
+            // СЃРёРјСѓР»СЏС†РёСЏ СЂР°Р±РѕС‚С‹
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();

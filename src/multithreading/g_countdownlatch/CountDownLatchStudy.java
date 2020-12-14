@@ -6,25 +6,25 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Пример блокирования потока с применением CountDownLatch
+ * РџСЂРёРјРµСЂ Р±Р»РѕРєРёСЂРѕРІР°РЅРёСЏ РїРѕС‚РѕРєР° СЃ РїСЂРёРјРµРЅРµРЅРёРµРј CountDownLatch
  */
 public class CountDownLatchStudy {
     public static void main(String[] args) throws InterruptedException {
-        // этот латч должен "отсчитаться" 3 раза, чтобы await разрешил дальнейшее выполнение
+        // СЌС‚РѕС‚ Р»Р°С‚С‡ РґРѕР»Р¶РµРЅ "РѕС‚СЃС‡РёС‚Р°С‚СЊСЃСЏ" 3 СЂР°Р·Р°, С‡С‚РѕР±С‹ await СЂР°Р·СЂРµС€РёР» РґР°Р»СЊРЅРµР№С€РµРµ РІС‹РїРѕР»РЅРµРЅРёРµ
         CountDownLatch cdl = new CountDownLatch(3);
 
         ExecutorService es = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 3; i++) {
-            // передаем латч по все потоки, каждый его отсчитает после таймаута
+            // РїРµСЂРµРґР°РµРј Р»Р°С‚С‡ РїРѕ РІСЃРµ РїРѕС‚РѕРєРё, РєР°Р¶РґС‹Р№ РµРіРѕ РѕС‚СЃС‡РёС‚Р°РµС‚ РїРѕСЃР»Рµ С‚Р°Р№РјР°СѓС‚Р°
             es.submit(new Processor(cdl, i));
         }
 
         es.shutdown();
 
-        // тут стоим, пока потоки не отсчитают латч
+        // С‚СѓС‚ СЃС‚РѕРёРј, РїРѕРєР° РїРѕС‚РѕРєРё РЅРµ РѕС‚СЃС‡РёС‚Р°СЋС‚ Р»Р°С‚С‡
         cdl.await();
 
-        System.out.println("Латч отсчитался до нуля");
+        System.out.println("Р›Р°С‚С‡ РѕС‚СЃС‡РёС‚Р°Р»СЃСЏ РґРѕ РЅСѓР»СЏ");
     }
 }
 
@@ -40,12 +40,12 @@ class Processor implements Runnable {
     @Override
     public void run() {
         try {
-            // рандомный таймаут
+            // СЂР°РЅРґРѕРјРЅС‹Р№ С‚Р°Р№РјР°СѓС‚
             Thread.sleep(new Random().nextInt(5000));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         countDownLatch.countDown();
-        System.out.println("Thread("+id+") отсчитал латч.");
+        System.out.println("Thread("+id+") РѕС‚СЃС‡РёС‚Р°Р» Р»Р°С‚С‡.");
     }
 }

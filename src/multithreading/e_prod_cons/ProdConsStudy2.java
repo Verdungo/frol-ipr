@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Реализация паттерна производитель/потребитель с использованием обычного LinkedList
- * Обеспечить потокобезопасность при этом - моя задача.
+ * Р РµР°Р»РёР·Р°С†РёСЏ РїР°С‚С‚РµСЂРЅР° РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊ/РїРѕС‚СЂРµР±РёС‚РµР»СЊ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РѕР±С‹С‡РЅРѕРіРѕ LinkedList
+ * РћР±РµСЃРїРµС‡РёС‚СЊ РїРѕС‚РѕРєРѕР±РµР·РѕРїР°СЃРЅРѕСЃС‚СЊ РїСЂРё СЌС‚РѕРј - РјРѕСЏ Р·Р°РґР°С‡Р°.
  */
 public class ProdConsStudy2 {
 
@@ -45,13 +45,13 @@ class ProducerConsumer {
     private Queue<Integer> queue = new LinkedList<>();
     private final int limit = 10;
 
-    // необходим лок, на который будут блокироваться методы продюсера и консьюмера
+    // РЅРµРѕР±С…РѕРґРёРј Р»РѕРє, РЅР° РєРѕС‚РѕСЂС‹Р№ Р±СѓРґСѓС‚ Р±Р»РѕРєРёСЂРѕРІР°С‚СЊСЃСЏ РјРµС‚РѕРґС‹ РїСЂРѕРґСЋСЃРµСЂР° Рё РєРѕРЅСЃСЊСЋРјРµСЂР°
     private final Object lock = new Object();
 
     public void produce() throws InterruptedException {
         int val = 0;
         while (true) {
-            synchronized (lock) { // при ArrayBlockingQueue нет необходимости дополнительного блока синхронизации
+            synchronized (lock) { // РїСЂРё ArrayBlockingQueue РЅРµС‚ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРіРѕ Р±Р»РѕРєР° СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё
                 while (queue.size() == limit) {
                     lock.wait();
                 }
@@ -63,7 +63,7 @@ class ProducerConsumer {
 
     public void consume() throws InterruptedException{
         while (true) {
-            synchronized (lock) { // при ArrayBlockingQueue нет необходимости дополнительного блока синхронизации
+            synchronized (lock) { // РїСЂРё ArrayBlockingQueue РЅРµС‚ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРіРѕ Р±Р»РѕРєР° СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё
                 while (queue.size() == 0) {
                     lock.wait();
                 }
