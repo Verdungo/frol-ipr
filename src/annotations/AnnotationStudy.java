@@ -13,8 +13,6 @@ import java.lang.reflect.Proxy;
  * Тестирование пользовательской аннотации {@link ActionListenerFor},
  * устанавливающей обработчик события (нажатия кнопки)
  */
-//@MyMethodAnnotation - не применимо, т.к. имеет таргет ElementType.METHOD
-@MyAnnotation(name = "name", id = 1) // автор тоже неявно присутствует как default-значение
 public class AnnotationStudy {
     public static void main(String[] args) {
         ButtonFrame frame = new ButtonFrame();
@@ -76,7 +74,7 @@ class ButtonFrame extends JFrame {
 class ActionListenerUtil {
 
     /**
-     * Ищет все декорированные ActionListenerFor методы, привязывает к соответствующим полям
+     * Ищет все аннотированные ActionListenerFor методы, привязывает к соответствующим полям
      * @param obj
      */
     @MyMethodAnnotation

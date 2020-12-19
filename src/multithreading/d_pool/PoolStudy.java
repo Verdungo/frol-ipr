@@ -2,6 +2,7 @@ package multithreading.d_pool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -14,7 +15,7 @@ public class PoolStudy {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
         // загружаем пулу (из 2 потоков) 5 "работ"
-        for (int i = 0; i < 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             executorService.submit(new Work(i));
         }
         System.out.println("Submitted");
@@ -23,8 +24,13 @@ public class PoolStudy {
         executorService.shutdown();        // Без shutdown'а awaitTermination будет ждать весь свой таймаут, потоки будут активны
         System.out.println("Shutdown");
 
-        // после шатдауна дать пулу работу не получится
-        //executorService.submit(new Work(20));
+        // после шатдауна дать пулу работу нельзя
+        try {
+            executorService.submit(new Work(20));
+        } catch (RejectedExecutionException e) {
+            System.out.print("EXCEPTION! Попытка нагрузить пул работой после шатдауна. ");
+            System.out.println("После shutdown'a пула добавить ему работы не получится!");
+        }
 
         // дожидаемся, пока все потоки из пула будут завершены
         executorService.awaitTermination(1, TimeUnit.MINUTES);

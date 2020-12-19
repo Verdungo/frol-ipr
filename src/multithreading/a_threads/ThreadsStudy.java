@@ -1,9 +1,6 @@
 package multithreading.a_threads;
 
-import java.util.logging.Logger;
-
 public class ThreadsStudy {
-    private static final Logger LOGGER = Logger.getLogger(ThreadsStudy.class.getName());
 
     public static void main(String[] args) throws InterruptedException {
         //вариант 1 - наследник Thread
@@ -13,16 +10,15 @@ public class ThreadsStudy {
         myThread1.start();
         myThread2.start();
 
-        LOGGER.info("----------------------------- Сразу после запуска потоков");
+        System.out.println("----------------------------- Сразу после запуска потоков");
 
         Thread.sleep(2000);
 
-        LOGGER.info("----------------------------- Просто подождали две секунды");
+        System.out.println("----------------------------- Просто подождали две секунды");
     }
 }
 
 class MyThread extends Thread {
-    private static final Logger LOGGER = Logger.getLogger(MyThread.class.getName());
 
     public MyThread(String name) {
         super(name);
@@ -32,13 +28,12 @@ class MyThread extends Thread {
     public void run() {
         for (int i = 0; i < 200; i++) {
             String msg = i + ": from thread '" + this.getName() + "'";
-            LOGGER.info(msg);
+            System.out.println(msg);
         }
     }
 }
 
 class MyRunnable implements Runnable {
-    private static final Logger LOGGER = Logger.getLogger(MyRunnable.class.getName());
 
     private String name;
 
@@ -50,7 +45,7 @@ class MyRunnable implements Runnable {
     public void run() {
         for (int i = 0; i < 200; i++) {
             String msg = i + ": from thread '" + name + "'";
-            LOGGER.info(msg);
+            System.out.println(msg);
         }
     }
 }

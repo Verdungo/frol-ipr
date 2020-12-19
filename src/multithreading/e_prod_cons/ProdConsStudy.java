@@ -75,19 +75,3 @@ public class ProdConsStudy {
         }
     }
 }
-
-class Producer implements Runnable {
-
-    @Override
-    public void run() {
-
-    }
-}
-
-class Comsumer implements Runnable {
-
-    @Override
-    public void run() {
-
-    }
-}

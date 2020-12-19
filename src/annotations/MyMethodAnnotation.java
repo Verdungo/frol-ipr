@@ -6,8 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Такой аннотацией можно декорировать только метод
- * IDE будет истерить, если попробовать декорировать что-то другое
+ * Такой аннотацией можно аннотировать только метод
+ * IDE будет истерить, если попробовать аннотировать что-то другое
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.SOURCE)      // - не учитывается компилятором
